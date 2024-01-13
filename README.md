@@ -1,7 +1,33 @@
-# Vue 3 + Vite
+# GoodThings Foundation Vue App
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Welcome to the GoodThings Foundation Vue.js application! This app is designed to showcase information about various foundation sections.
 
-## Recommended IDE Setup
+## Table of Contents
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- [Home]
+- [About]
+- [The Digital Divide]
+- [Learn]
+
+## Getting Started
+
+1. Clone this repository.
+
+```bash
+git clone https://github.com/oy3/Reason-Digital-Assessment
+```
+
+2. Install dependencies.
+
+```bash
+cd goodthings-foundation-vue-app
+npm install
+```
+
+3. Run the app.
+
+```bash
+npm run serve
+```
+
+Visit [http://localhost:8080](http://localhost:8080) to view the app in your browser.
