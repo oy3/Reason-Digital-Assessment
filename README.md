@@ -59,7 +59,7 @@ npm install
 npm run serve
 ```
 
-Visit [http://localhost:8080](http://localhost:8080) to view the app in your browser.
+Visit [https://goodthingsfoundation.netlify.app/](https://goodthingsfoundation.netlify.app/) to view the app in your browser.
 
 ## Contributing
 Contributions are welcome! If you'd like to contribute to this project.
