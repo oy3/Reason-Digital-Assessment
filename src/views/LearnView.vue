@@ -1,34 +1,32 @@
-<script lang="js">
+<script setup>
 import { RouterLink } from "vue-router";
 import ArrowDown from "../assets/icon/ArrowDown.vue";
+import { useSinglePrismicDocument, PrismicText, PrismicImage, PrismicRichText, PrismicEmbed } from '@prismicio/vue';
 
-export default {
-    props: {},
-    data() {
-        return {};
-    },
-    methods: {},
-    computed: {
-    },
-    created: function () { },
-    mounted: function () { },
-    components: { RouterLink, ArrowDown },
-}
+const learn = useSinglePrismicDocument("learn").data;
+
 </script>
 
 <template>
     <div>
-        <div class="intro-bg">
+        <div>
+            <PrismicImage class="intro-bg" :field="learn.data.intro_img" fallback="" />
             <div class="bg-text">
-                <p class="title">Learn</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor
-                    incididunt ut labore et <br> dolore magna aliqua.</p>
+                <p class="title">
+                    <PrismicText :field="learn.data.intro_title" fallback="" />
+                </p>
+                <p class="description">
+                    <PrismicText :field="learn.data.intro_content" fallback="" />
+                </p>
             </div>
         </div>
 
         <div class="row" style=" margin: 50px;">
             <div class="column">
                 <div class="second-intro">
+
+                    <!-- <PrismicEmbed :field="learn.data.banner_embed" /> -->
+
                     <iframe width="100%" height="100%" src="https://www.youtube.com/embed/M3mKVegrEus?si=JSn2Efa-eczeQzza"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -37,27 +35,31 @@ export default {
             </div>
             <div class="column second-intro-half">
                 <div style=" margin: 0; position: absolute; top: 50%; transform: translateY(-50%);  padding: 40px;">
-                    <p class="title">We can help you get online and make the most of the internet</p>
-                    <p class="description">The internet can save you time and money and allow you to do more of the things
-                        you like doing best.
-                        <br>
-                        <br>
-                        Learn My Way is a website of free online courses for beginners, helping people develop digital
-                        skills to make the most of their online world.
+                    <p class="title">
+                        <PrismicText :field="learn.data.banner_title" fallback="" />
                     </p>
-                    <button class="btn">Find the help and support you need with Learn My Way</button>
+                    <p class="description">
+                        <PrismicText :field="learn.data.banner_content" fallback="" />
+                    </p>
+                    <button class="btn">
+                        <PrismicText :field="learn.data.banner_btn" fallback="" />
+                    </button>
                 </div>
 
             </div>
         </div>
 
         <div class="cta">
-            <h1> Find Good Things near you</h1>
-            <p>We work with thousands of organisations across the UK that specialise in digital skills support. So if you're
-                looking for free and friendly help to get you started, or a digital inclusion partner for a new project, our
-                network will offer you the support you need.</p>
+            <h1>
+                <PrismicText :field="learn.data.cta_title" fallback="" />
+            </h1>
+            <p>
+                <PrismicText :field="learn.data.cta_content" fallback="" />
+            </p>
 
-                <button class="btn">Find out what support is offered in your area</button>
+            <button class="btn">
+                <PrismicText :field="learn.data.cta_btn" fallback="" />
+            </button>
         </div>
     </div>
 </template>
@@ -67,17 +69,14 @@ export default {
     width: 100%;
     height: 500px;
     position: relative;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url(../assets/img/pic3.jpg);
+    object-fit: cover;
+    object-position: center;
 }
 
 .bg-text {
     width: 100%;
     height: auto;
     position: absolute;
-    /* left: 5%; */
     top: 25%;
 }
 
@@ -94,14 +93,13 @@ export default {
 }
 
 .bg-text .description {
-    width: fit-content;
+    width: 40%;
     font-size: 20px;
     padding: 15px;
     margin: 0px;
     margin-bottom: 20px;
     margin-left: 50px;
     background-color: white;
-    /* color: #478077; */
     color: rgb(105, 105, 105);
 }
 
@@ -121,7 +119,6 @@ export default {
     width: fit-content;
     padding: 15px;
     margin: 0;
-    /* margin-bottom: 10px; */
     font-size: 30px;
 }
 
@@ -129,7 +126,6 @@ export default {
     width: fit-content;
     padding: 15px;
     margin: 0px;
-    /* margin-bottom: 10px; */
     font-size: 20px;
 }
 
@@ -179,5 +175,57 @@ export default {
     text-decoration: none;
     display: inline-block;
     font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .intro-bg {
+        height: 300px;
+    }
+
+    .bg-text .title {
+        padding: 15px;
+        margin: 0px;
+        margin-bottom: 20px;
+        margin-left: 50px;
+        font-size: 30px;
+    }
+
+    .bg-text .description {
+        width: fit-content;
+        font-size: 18px;
+        padding: 15px;
+        margin: 0px 50px;
+    }
+
+    .second-intro-half .title {
+        margin: 0px 0px 15px 0px;
+        padding: 0px;
+        font-size: 20px;
+        font-weight: bold
+    }
+
+    .second-intro-half .description {
+        padding: 0px;
+        margin: 0px 0px 15px 0px;
+        font-size: 16px;
+    }
+
+    .second-intro-half .btn {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+
+    .cta {
+        padding: 50px;
+    }
+
+    .cta h1 {
+        font-size: 25px;
+    }
+
+    .cta p {
+        font-size: 18px;
+    }
+
 }
 </style>

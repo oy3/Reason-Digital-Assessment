@@ -1,99 +1,48 @@
-<script>
+<script setup>
 import { RouterLink } from "vue-router";
 import ArrowDown from "../assets/icon/ArrowDown.vue";
+import { useSinglePrismicDocument, PrismicText, PrismicImage, PrismicRichText } from '@prismicio/vue';
 
-export default {
-    components: { RouterLink, ArrowDown },
-};
+const divide = useSinglePrismicDocument("divide").data;
+
 </script>
 
 <template>
     <div>
         <!-- Header Section -->
-        <div class="intro-bg">
+        <div>
+            <PrismicImage class="intro-bg" :field="divide.data.intro_img" fallback="" />
             <div class="bg-text">
-                <p class="title">How to Fix the Digital Divide – for Good</p>
+                <p class="title">
+                    <PrismicText :field="divide.data.intro_title" fallback="" />
+                </p>
                 <p class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, <br>
-                    sed do eiusmod tempor incididunt ut labore et dolore<br>
-                    magna aliqua.
+                    <PrismicText :field="divide.data.intro_content" fallback="" />
                 </p>
             </div>
         </div>
 
         <div class="content">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua.
-            </p>
-
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/yD0AysMDXhQ?si=LD884v1azomZ8rds"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+            <PrismicRichText :field="divide.data.content" :htmlSerializer="optionalHtmlSerializer" />
         </div>
 
         <!-- Second Section -->
         <div class="row">
             <div class="column">
-                <div class="second-intro"></div>
+                <PrismicImage class="second-intro" :field="divide.data.cta_img" fallback="" />
             </div>
             <div class="column second-intro-half">
                 <div style=" margin: 0; position: absolute; top: 50%; transform: translateY(-50%);  padding: 40px;">
-                    <p class="title">Can you donate devices?</p>
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore
-                        magna aliqua.
+                    <p class="title">
+                        <PrismicText :field="divide.data.cta_title" fallback="" />
                     </p>
-                    <button class="btn">Fill in our application form</button>
+                    <p class="description">
+                        <PrismicText :field="divide.data.cta_content" fallback="" />
+                    </p>
+                    <button class="btn">
+                        <PrismicText :field="divide.data.cta_btn" fallback="" />
+                    </button>
                 </div>
-            </div>
-        </div>
-
-        <!-- About Section -->
-        <div class="about">
-            <h3>Our Initiatives</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut arcu fermentum, aliquet odio at, vehicula
-                nulla.
-            </p>
-
-            <div class="row space-evenly">
-                <div class="column center">
-                    <div>
-                        <h2>Digital Literacy Programs</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                        <button class="btn">Read more</button>
-                    </div>
-                </div>
-                <div class="column center">
-                    <div>
-                        <h2>Community Connectivity Projects</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                        <button class="btn">Read more</button>
-                    </div>
-                </div>
-                <div class="column center">
-                    <div>
-                        <h2>Accessible Technology Initiatives</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                        <button class="btn">Read more</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="center">
-                <button class="btn">Explore All Initiatives</button>
             </div>
         </div>
     </div>
@@ -104,10 +53,8 @@ export default {
     width: 100%;
     height: 500px;
     position: relative;
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url(../assets/img/pic9.jpeg);
+    object-fit: cover;
+    object-position: top;
 }
 
 .bg-text {
@@ -130,7 +77,7 @@ export default {
 }
 
 .bg-text .description {
-    width: fit-content;
+    width: 40%;
     font-size: 20px;
     padding: 15px;
     margin: 0px;
@@ -150,10 +97,8 @@ export default {
 .second-intro {
     width: 100%;
     height: 350px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../assets/img/pic2.jpg);
+    object-fit: cover;
+    object-position: bottom;
 }
 
 .second-intro-half {
@@ -167,7 +112,6 @@ export default {
     width: fit-content;
     padding: 15px;
     margin: 0;
-    /* margin-bottom: 10px; */
     font-size: 30px;
 }
 
@@ -175,7 +119,6 @@ export default {
     width: fit-content;
     padding: 15px;
     margin: 0px;
-    /* margin-bottom: 10px; */
     font-size: 20px;
 }
 
@@ -199,105 +142,46 @@ export default {
     color: #478077;
 }
 
-.cta {
-    background-color: #ececec;
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
+@media (max-width: 768px) {
+    .intro-bg {
+        height: 300px;
+    }
 
-.cta h1 {
-    margin: 0;
-}
+    .bg-text .title {
+        font-size: 36px;
+        margin: 0px 20px !important;
+    }
 
-.cta p {
-    font-size: 20px;
-}
+    .bg-text .description {
+        width: fit-content;
+        font-size: 16px;
+        margin: 10px 20px !important;
+    }
 
-.cta .action {
-    background-color: white;
-    padding: 30px;
-    text-align: center;
-    font-size: 25px;
-    margin-top: 20px;
-}
+    .content {
+        padding: 50px;
+    }
 
-.cta .action a {
-    text-decoration: none;
-    color: #497c8f;
-    font-weight: bold;
-    border-bottom: 2px solid #497c8f;
-}
+    .second-intro {
+        height: 250px;
+    }
 
-.cta .btn {
-    background-color: #be3148;
-    color: #fff;
-    padding: 8px 20px;
-    border: none;
-    text-align: center;
-    border-radius: 20px;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: bold;
-    margin-left: 15px;
-}
+    .second-intro-half {
+        height: 250px;
+    }
 
-.about {
-    padding: 80px;
-    background-color: #497c8f;
-    color: white;
-}
+    .second-intro-half .title {
+        font-size: 20px;
+    }
 
-.about h3 {
-    font-size: 30px;
+    .second-intro-half .description {
+        font-size: 14px;
+    }
 
-}
-
-.about p {
-    font-size: 16px;
-}
-
-.about .row {
-    color: black;
-    margin-bottom: 70px;
-}
-
-.about .column {
-    float: left;
-    width: 20%;
-    height: 200px;
-    text-align: center;
-    background-color: white;
-    color: rgb(6, 5, 5);
-}
-
-.about .btn {
-    background-color: white;
-    border: none;
-    color: #be3148;
-    padding: 10px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.about .row .btn {
-    border: 2px solid black;
-}
-
-.about .row .btn:hover {
-    background-color: #04AA6D;
-    color: white;
-}
-
-.space-evenly {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    .second-intro-half .btn {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
 }
 </style>
   

@@ -9,17 +9,6 @@ import FingerPrint from "../assets/icon/FingerPrint.vue";
 const store = useStore();
 
 const menuItems = computed(() => store.state.menuItems);
-
-// export default {
-//     data() { },
-//     watch: {
-//     },
-//     created() { },
-//     computed: {},
-//     methods: {},
-//     watch: {},
-//     components: { Search, FingerPrint, RouterLink }
-// }
 </script>
 
 
@@ -31,7 +20,7 @@ const menuItems = computed(() => store.state.menuItems);
                 </a></li>
             <div class="right">
                 <li class="link">
-                    <RouterLink class="border-lr active" to="/learn">Learn</RouterLink>
+                    <RouterLink class="border-lr" to="/learn">Learn</RouterLink>
                 </li>
                 <li class="">
                     <RouterLink class="act" to="/">Donate</RouterLink>
@@ -107,7 +96,6 @@ ul.topnav li a {
 }
 
 ul.topnav li a:hover:not(.active) {
-    /* background-color: #111; */
     border-bottom: 3px solid #527b72;
 }
 
@@ -156,7 +144,6 @@ ul.bottomnav li {
 ul.bottomnav li a {
     display: block;
     color: black;
-    /* text-align: center; */
     padding: 14px 16px;
     text-decoration: none;
     font-weight: bold;

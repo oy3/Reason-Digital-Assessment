@@ -26,7 +26,7 @@ const router = createRouter({
       path: '/divide',
       name: 'divide',
       component: DigitalDivideView,
-    },
+    }
   ]
 })
 

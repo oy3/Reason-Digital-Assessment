@@ -1,53 +1,62 @@
-<script lang="js">
-import { RouterLink } from "vue-router";
-import ArrowDown from "../assets/icon/ArrowDown.vue";
+<script setup>
+import { RouterLink } from 'vue-router';
+import ArrowDown from '../assets/icon/ArrowDown.vue';
+import { useSinglePrismicDocument, PrismicText, PrismicImage } from '@prismicio/vue';
+import Items from '../components/HomeItem.vue';
 
-export default {
-    props: {},
-    data() {
-        return {};
-    },
-    methods: {},
-    computed: {
-    },
-    created: function () { },
-    mounted: function () { },
-    components: { RouterLink, ArrowDown },
-}
+const home = useSinglePrismicDocument("home").data;
+
+const items = [
+    { id: 1, title: 'Get online week', description: 'Lorem ipsum dolor sit amet' },
+    { id: 2, title: 'Get online week', description: 'Lorem ipsum dolor sit amet' },
+    { id: 3, title: 'Get online week', description: 'Lorem ipsum dolor sit amet' },
+    { id: 4, title: 'Get online week', description: 'Lorem ipsum dolor sit amet' },
+];
 </script>
-
 <template>
     <div>
         <div class="intro-bg">
+            <PrismicImage class="intro-bg" :field="home.data.intro_img" fallback="" />
             <div class="bg-text">
-                <p class="title">Get online week 2021</p>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing <br> elit, sed do eiusmod tempor
-                    incididunt ut labore et <br> dolore magna aliqua.</p>
-                <button class="btn">Get involved now!</button>
+                <p class="title">
+                    <PrismicText :field="home.data.intro_title" fallback="" />
+                </p>
+                <p class="description">
+                    <PrismicText :field="home.data.intro_content" fallback="" />
+                </p>
+                <button class="btn">
+                    <PrismicText :field="home.data.intro_btn" fallback="" />
+                </button>
             </div>
         </div>
 
         <div class="row">
             <div class="column">
-                <div class="second-intro"></div>
+                <PrismicImage class="second-intro" :field="home.data.banner_img" />
             </div>
             <div class="column second-intro-half">
                 <div style=" margin: 0; position: absolute; top: 50%; transform: translateY(-50%);  padding: 40px;">
-                    <p class="title">We are a social change charity, helping people to improve their lives through digital.
+                    <p class="title">
+                        <PrismicText :field="home.data.banner_title" fallback="" />
                     </p>
-                    <p class="description">We tackle the most pressing issues of our time, working with partners in
-                        thousands of
-                        communities across
-                        the UK and further afield.</p>
-                    <button class="btn">Learn more about us</button>
+                    <p class="description">
+                        <PrismicText :field="home.data.banner_content" fallback="Error" />
+                    </p>
+                    <button class="btn">
+                        <PrismicText :field="home.data.banner_btn" fallback="Error" />
+                    </button>
                 </div>
 
             </div>
         </div>
 
         <div class="cta">
-            <h1>How can we help you?</h1>
-            <p>Let us know who you are and what you're looking for, and we'll help get you to the right place.</p>
+            <h1>
+                <PrismicText :field="home.data.cta_title" fallback="" />
+            </h1>
+            <p>
+                <PrismicText :field="home.data.cta_content" fallback="" />
+            </p>
 
             <div class="action">
                 I am <a href="">an Individual
@@ -55,62 +64,138 @@ export default {
                 </a> and I <a href="">want to learn
                     <ArrowDown />
                 </a>
-                <button class="btn">Start now</button>
+                <button class="btn">
+                    <PrismicText :field="home.data.cta_btn" fallback="" />
+                </button>
             </div>
         </div>
 
         <div class="about">
-            <h3>What do we do?</h3>
-            <p>You might not have heard of us, bu we're the people behind the following impactful programmes.</p>
+            <h3>
+                <PrismicText :field="home.data.content_title" fallback="" />
+            </h3>
+            <p>
+                <PrismicText :field="home.data.content" fallback="" />
+            </p>
 
-            <div class="row space-evenly">
-                <div class="column center">
+            <Items :data="items" />
+
+            <!-- <div class="row space-evenly">
+                <div v-for="item in items" :key="item.id" class="column center">
                     <div>
-                        <h2>Get online week</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
+                        <h2>{{ item.title }}</h2>
+                        <p>{{ item.description }}</p>
                         <button class="btn">Read more</button>
                     </div>
                 </div>
-                <div class="column center">
-                    <div>
-                        <h2>Get online week</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                        <button class="btn">Read more</button>
-                    </div>
-                </div>
-                <div class="column center">
-                    <div>
-                        <h2>Get online week</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                        <button class="btn">Read more</button>
-                    </div>
-                </div>
-                <div class="column center">
-                    <div>
-                        <h2>Get online week</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                        <button class="btn">Read more</button>
-                    </div>
-                </div>
-            </div>
+            </div> -->
 
             <div class="center">
-                <button class="btn">More about what we do</button>
+                <button class="btn">
+                    <PrismicText :field="home.data.content_btn" fallback="" />
+                </button>
             </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+@media (max-width: 768px) {
+    .intro-bg {
+        width: 100% !important;
+        height: 300px !important;
+    }
+
+    .bg-text .title {
+        font-size: 36px !important;
+        width: fit-content !important;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+    }
+
+    .bg-text .description {
+        width: fit-content !important;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        font-size: 16px !important;
+    }
+
+    .bg-text .btn {
+        margin-left: 10px !important;
+    }
+
+    .second-intro,
+    .second-intro-half {
+        height: 250px !important;
+    }
+
+    .second-intro-half .title {
+        font-size: 16px !important;
+        font-weight: bold;
+        margin-left: 0px !important;
+        margin-bottom: 10px !important;
+        padding: 0px !important;
+    }
+
+    .second-intro-half .description {
+        font-size: 14px !important;
+        margin-left: 0px !important;
+        margin-bottom: 10px !important;
+        padding: 0px !important;
+    }
+
+    .second-intro-half .btn {
+        font-size: 14px !important;
+        margin-left: 0px !important;
+        padding: 5px 10px !important;
+    }
+
+    .cta {
+        padding: 30px !important;
+    }
+
+    .cta h1 {
+        font-size: 24px !important;
+    }
+
+    .cta p {
+        font-size: 16px !important;
+    }
+
+    .cta .action {
+        padding: 20px !important;
+    }
+
+    .cta .btn {
+        font-size: 14px !important;
+        margin-top: 20px !important;
+    }
+
+    .about {
+        padding: 30px !important;
+    }
+
+    .about h3 {
+        font-size: 24px !important;
+    }
+
+    .about p {
+        font-size: 14px !important;
+    }
+
+    .about .btn {
+        font-size: 12px !important;
+        padding: 5px 10px !important;
+    }
+}
+
 .intro-bg {
     width: 100%;
     height: 500px;
     position: relative;
-    background-color: #578092;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url(../assets/img/pic1.jpg);
+    background-color: #657f90;
+    object-fit: contain;
+    object-position: center;
 }
 
 .bg-text {
@@ -134,7 +219,7 @@ export default {
 }
 
 .bg-text .description {
-    width: fit-content;
+    width: 40%;
     font-size: 20px;
     padding: 15px;
     margin: 0px;
@@ -161,10 +246,8 @@ export default {
 .second-intro {
     width: 100%;
     height: 350px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url(../assets/img/pic2.jpg);
+    object-fit: cover;
+    object-position: center;
 }
 
 .second-intro-half {
@@ -178,7 +261,6 @@ export default {
     width: fit-content;
     padding: 15px;
     margin: 0;
-    /* margin-bottom: 10px; */
     font-size: 30px;
 }
 
@@ -186,7 +268,6 @@ export default {
     width: fit-content;
     padding: 15px;
     margin: 0px;
-    /* margin-bottom: 10px; */
     font-size: 20px;
 }
 
@@ -269,20 +350,6 @@ export default {
     font-size: 16px;
 }
 
-.about .row {
-    color: black;
-    margin-bottom: 70px;
-}
-
-.about .column {
-    float: left;
-    width: 20%;
-    height: 200px;
-    text-align: center;
-    background-color: white;
-    color: rgb(6, 5, 5);
-}
-
 .about .btn {
     background-color: white;
     border: none;
@@ -296,14 +363,7 @@ export default {
     font-weight: bold;
 }
 
-.about .row .btn {
-    border: 2px solid black;
-}
 
-.about .row .btn:hover {
-    background-color: #04AA6D;
-    color: white;
-}
 
 .space-evenly {
     display: flex;
