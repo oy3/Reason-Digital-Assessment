@@ -15,11 +15,11 @@ const items = [
 </script>
 <template>
     <div class="container">
-        <div class="banner1">
+        <div class="banner bg-intro">
             <PrismicImage :field="home.data.intro_img" fallback="" />
             <div class="overlay">
-                <PrismicText class="title" :field="home.data.intro_title" fallback="" />
-                <PrismicText class="content" :field="home.data.intro_content" fallback="" />
+                <PrismicText class="title bg-black-transparent" :field="home.data.intro_title" fallback="" />
+                <PrismicText class="content bg-primary" :field="home.data.intro_content" fallback="" />
                 <button class="button">
                     <PrismicText :field="home.data.intro_btn" fallback="" />
                 </button>
@@ -91,50 +91,15 @@ const items = [
 </template>
 
 <style scoped>
-.banner1 {
-    width: 100%;
-    height: 50vh;
+.bg-intro {
     background-color: #657f90;
-    position: relative;
-    overflow: hidden;
 }
 
-.banner1 img {
-    width: 100%;
-    height: 100%;
+.banner img {
     object-fit: contain;
-    object-position: center;
 }
 
-.banner1 .overlay {
-    position: absolute;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-    text-align: left;
-    padding: 20px;
-    color: #fff;
-    width: 30%;
-}
-
-.banner1 .overlay .title {
-    width: fit-content;
-    font-size: 2em;
-    margin-bottom: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 15px;
-}
-
-.banner1 .overlay .content {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    background-color: white;
-    color: rgb(105, 105, 105);
-    padding: 15px;
-}
-
-.banner1 .overlay .button {
+.banner .overlay .button {
     background-color: #fff;
     color: #be3148;
     padding: 10px 24px;
@@ -283,11 +248,7 @@ const items = [
 
 @media screen and (max-width: 768px) {
 
-    .banner1 {
-        height: 30vh;
-    }
-
-    .banner1 .overlay {
+    .banner .overlay {
         width: 80%;
         position: absolute;
         top: 50%;
@@ -299,17 +260,17 @@ const items = [
         justify-items: center;
     }
 
-    .banner1 .overlay .title {
+    .banner .overlay .title {
         padding: 5px;
         font-size: 1.5em;
     }
 
-    .banner1 .overlay .content {
+    .banner .overlay .content {
         font-size: 1em;
         padding: 5px;
     }
 
-    .banner1 .overlay .button {
+    .banner .overlay .button {
         font-size: 1em;
     }
 

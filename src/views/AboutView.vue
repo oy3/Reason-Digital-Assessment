@@ -11,11 +11,11 @@ const about = useSinglePrismicDocument("about").data;
 
 <template>
     <div class="container">
-        <div class="banner1">
+        <div class="banner">
             <PrismicImage :field="about.data.intro_img" fallback="" />
             <div class="overlay">
-                <PrismicText class="title" :field="about.data.intro_title" fallback="" />
-                <PrismicText class="content" :field="about.data.intro_content" fallback="" />
+                <PrismicText class="title bg-primary" :field="about.data.intro_title" fallback="" />
+                <PrismicText class="content bg-black-transparent" :field="about.data.intro_content" fallback="" />
             </div>
         </div>
 
@@ -51,48 +51,6 @@ const about = useSinglePrismicDocument("about").data;
 </template>
 
 <style scoped>
-.banner1 {
-    width: 100%;
-    height: 50vh;
-    position: relative;
-    overflow: hidden;
-}
-
-.banner1 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.banner1 .overlay {
-    position: absolute;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-    text-align: left;
-    padding: 20px;
-    color: #fff;
-    width: 30%;
-}
-
-.banner1 .overlay .title {
-    width: fit-content;
-    font-size: 2em;
-    margin-bottom: 10px;
-    background-color: #497c8f;
-    color: white;
-    padding: 15px;
-}
-
-.banner1 .overlay .content {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    background-color: rgba(0, 0, 0, 0.667);
-    color: white;
-    padding: 15px;
-}
-
 .tiles {
     height: fit-content;
     display: flex;
@@ -107,7 +65,7 @@ const about = useSinglePrismicDocument("about").data;
 
 .cta .row {
     width: 100%;
-    height: auto;
+    height: 40vh;
     display: flex;
     background-color: #497c8f;
 }
@@ -131,7 +89,7 @@ const about = useSinglePrismicDocument("about").data;
     text-align: left;
     color: #fff;
     max-width: 80%;
-    padding: 10px 50px;
+    padding: 0px 50px;
     display: grid;
     justify-content: center;
     justify-items: start;
@@ -141,10 +99,12 @@ const about = useSinglePrismicDocument("about").data;
 
 .cta .row .column .content h1 {
     font-size: 25px;
+    margin: 10px 0px;
 }
 
 .cta .row .column .content p {
     font-size: 20px;
+    margin: 10px 0px;
 }
 
 .cta .row .column .content button {
@@ -160,6 +120,7 @@ const about = useSinglePrismicDocument("about").data;
     font-size: 16px;
     font-weight: bold;
     transition-duration: 0.4s;
+    margin-bottom: 30px;
 }
 
 .cta .row .column .content button:hover {
@@ -169,33 +130,6 @@ const about = useSinglePrismicDocument("about").data;
 
 
 @media screen and (max-width: 768px) {
-
-    .banner1 {
-        height: 30vh;
-    }
-
-    .banner1 .overlay {
-        width: 80%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        color: #fff;
-        display: grid;
-        justify-items: center;
-    }
-
-    .banner1 .overlay .title {
-        padding: 5px;
-        font-size: 1.5em;
-    }
-
-    .banner1 .overlay .content {
-        font-size: 1em;
-        padding: 5px;
-    }
-
     .tiles {
         flex-direction: column;
         padding: 50px 10vw;
@@ -214,6 +148,10 @@ const about = useSinglePrismicDocument("about").data;
         width: 100%;
         height: fit-content;
         margin: 0;
+    }
+
+    .cta .column img {
+        max-height: 200px;
     }
 
     .cta h1 {

@@ -3,18 +3,6 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-/* .column {
-    float: left;
-    width: 50%;
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-} */
-
-
 .center {
     display: flex;
     justify-content: center;
@@ -41,4 +29,86 @@ textarea {
 
 .d-grid {
     display: grid;
+}
+
+.bg-primary {
+    background-color: #497c8f;
+}
+
+.bg-secondary {
+    background-color: #04aa6d;
+}
+
+.bg-black-transparent {
+    background-color: #00000080;
+}
+
+.banner {
+    width: 100%;
+    height: 50vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.banner .overlay {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    text-align: left;
+    padding: 20px;
+    color: #fff;
+    width: 30%;
+}
+
+.banner .overlay .title {
+    width: fit-content;
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: white;
+    padding: 15px;
+}
+
+.banner .overlay .content {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: white;
+    padding: 15px;
+}
+
+
+@media (max-width: 768px) {
+    .banner {
+        height: 30vh;
+    }
+
+    .banner .overlay {
+        width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        display: grid;
+        justify-items: center;
+    }
+
+
+    .banner .overlay .title {
+        padding: 5px;
+        font-size: 1.5em;
+    }
+
+    .banner .overlay .content {
+        font-size: 1em;
+        padding: 5px;
+    }
 }

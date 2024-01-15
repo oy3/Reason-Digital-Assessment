@@ -9,11 +9,11 @@ const learn = useSinglePrismicDocument("learn").data;
 
 <template>
     <div class="container">
-        <div class="banner1">
+        <div class="banner">
             <PrismicImage :field="learn.data.intro_img" fallback="" />
             <div class="overlay">
-                <PrismicText class="title" :field="learn.data.intro_title" fallback="" />
-                <PrismicText class="content" :field="learn.data.intro_content" fallback="" />
+                <PrismicText class="title bg-primary" :field="learn.data.intro_title" fallback="" />
+                <PrismicText class="content bg-black-transparent" :field="learn.data.intro_content" fallback="" />
             </div>
         </div>
 
@@ -57,48 +57,6 @@ const learn = useSinglePrismicDocument("learn").data;
 </template>
 
 <style scoped>
-.banner1 {
-    width: 100%;
-    height: 50vh;
-    position: relative;
-    overflow: hidden;
-}
-
-.banner1 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.banner1 .overlay {
-    position: absolute;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-    text-align: left;
-    padding: 20px;
-    color: #fff;
-    width: 30%;
-}
-
-.banner1 .overlay .title {
-    width: fit-content;
-    font-size: 2em;
-    margin-bottom: 10px;
-    background-color: #497c8f;
-    color: white;
-    padding: 15px;
-}
-
-.banner1 .overlay .content {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-    background-color: rgba(0, 0, 0, 0.667);
-    color: white;
-    padding: 15px;
-}
-
 .banner2 {
     width: 100%;
     height: 35vh;
@@ -185,32 +143,6 @@ const learn = useSinglePrismicDocument("learn").data;
 }
 
 @media (max-width: 768px) {
-    .banner1 {
-        height: 30vh;
-    }
-
-    .banner1 .overlay {
-        width: 80%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        color: #fff;
-        display: grid;
-        justify-items: center;
-    }
-
-    .banner1 .overlay .title {
-        padding: 5px;
-        font-size: 1.5em;
-    }
-
-    .banner1 .overlay .content {
-        font-size: 1em;
-        padding: 5px;
-    }
-
     .banner2 {
         padding: 30px 0px 0px 0px;
         flex-direction: column;
