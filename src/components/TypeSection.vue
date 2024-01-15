@@ -28,18 +28,17 @@ const { section } = defineProps(['section']);
 <style scoped>
 .col {
     flex: 1;
-    max-width: 30%;
+    max-width: 25%;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-right: 10px;
     background-color: #fff;
 }
 
 .col img {
     width: 100%;
-    height: 300px;
+    height: 250px;
     border-radius: 4px;
     object-fit: cover;
 }

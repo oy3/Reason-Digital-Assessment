@@ -14,39 +14,36 @@ const items = [
 ];
 </script>
 <template>
-    <div>
-        <div class="intro-bg">
-            <PrismicImage class="intro-bg" :field="home.data.intro_img" fallback="" />
-            <div class="bg-text">
-                <p class="title">
-                    <PrismicText :field="home.data.intro_title" fallback="" />
-                </p>
-                <p class="description">
-                    <PrismicText :field="home.data.intro_content" fallback="" />
-                </p>
-                <button class="btn">
+    <div class="container">
+        <div class="banner1">
+            <PrismicImage :field="home.data.intro_img" fallback="" />
+            <div class="overlay">
+                <PrismicText class="title" :field="home.data.intro_title" fallback="" />
+                <PrismicText class="content" :field="home.data.intro_content" fallback="" />
+                <button class="button">
                     <PrismicText :field="home.data.intro_btn" fallback="" />
                 </button>
             </div>
         </div>
 
-        <div class="row">
+        <div class="banner2">
             <div class="column">
-                <PrismicImage class="second-intro" :field="home.data.banner_img" />
+                <PrismicImage :field="home.data.banner_img" />
             </div>
-            <div class="column second-intro-half">
-                <div style=" margin: 0; position: absolute; top: 50%; transform: translateY(-50%);  padding: 40px;">
-                    <p class="title">
+            <div class="column">
+                <div class="content">
+                    <h1>
                         <PrismicText :field="home.data.banner_title" fallback="" />
-                    </p>
-                    <p class="description">
+                    </h1>
+                    <p>
                         <PrismicText :field="home.data.banner_content" fallback="Error" />
                     </p>
-                    <button class="btn">
-                        <PrismicText :field="home.data.banner_btn" fallback="Error" />
-                    </button>
+                    <RouterLink to="/learn">
+                        <button class="button">
+                            <PrismicText :field="home.data.banner_btn" fallback="Error" />
+                        </button>
+                    </RouterLink>
                 </div>
-
             </div>
         </div>
 
@@ -58,220 +55,141 @@ const items = [
                 <PrismicText :field="home.data.cta_content" fallback="" />
             </p>
 
-            <div class="action">
-                I am <a href="">an Individual
-                    <ArrowDown />
-                </a> and I <a href="">want to learn
-                    <ArrowDown />
-                </a>
-                <button class="btn">
+            <div class="inner">
+                <span>
+                    I am <a href="">an Individual
+                        <ArrowDown />
+                    </a> and I <a href="">want to learn
+                        <ArrowDown />
+                    </a>
+                </span>
+                <button>
                     <PrismicText :field="home.data.cta_btn" fallback="" />
                 </button>
             </div>
         </div>
 
-        <div class="about">
-            <h3>
+        <div class="banner3">
+            <h1>
                 <PrismicText :field="home.data.content_title" fallback="" />
-            </h3>
+            </h1>
             <p>
                 <PrismicText :field="home.data.content" fallback="" />
             </p>
 
             <Items :data="items" />
 
-            <!-- <div class="row space-evenly">
-                <div v-for="item in items" :key="item.id" class="column center">
-                    <div>
-                        <h2>{{ item.title }}</h2>
-                        <p>{{ item.description }}</p>
-                        <button class="btn">Read more</button>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="center">
-                <button class="btn">
-                    <PrismicText :field="home.data.content_btn" fallback="" />
-                </button>
+                <RouterLink to="/about">
+                    <button>
+                        <PrismicText :field="home.data.content_btn" fallback="" />
+                    </button>
+                </RouterLink>
             </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-@media (max-width: 768px) {
-    .intro-bg {
-        width: 100% !important;
-        height: 300px !important;
-    }
-
-    .bg-text .title {
-        font-size: 36px !important;
-        width: fit-content !important;
-        margin-left: 10px !important;
-        margin-right: 10px !important;
-    }
-
-    .bg-text .description {
-        width: fit-content !important;
-        margin-left: 10px !important;
-        margin-right: 10px !important;
-        font-size: 16px !important;
-    }
-
-    .bg-text .btn {
-        margin-left: 10px !important;
-    }
-
-    .second-intro,
-    .second-intro-half {
-        height: 250px !important;
-    }
-
-    .second-intro-half .title {
-        font-size: 16px !important;
-        font-weight: bold;
-        margin-left: 0px !important;
-        margin-bottom: 10px !important;
-        padding: 0px !important;
-    }
-
-    .second-intro-half .description {
-        font-size: 14px !important;
-        margin-left: 0px !important;
-        margin-bottom: 10px !important;
-        padding: 0px !important;
-    }
-
-    .second-intro-half .btn {
-        font-size: 14px !important;
-        margin-left: 0px !important;
-        padding: 5px 10px !important;
-    }
-
-    .cta {
-        padding: 30px !important;
-    }
-
-    .cta h1 {
-        font-size: 24px !important;
-    }
-
-    .cta p {
-        font-size: 16px !important;
-    }
-
-    .cta .action {
-        padding: 20px !important;
-    }
-
-    .cta .btn {
-        font-size: 14px !important;
-        margin-top: 20px !important;
-    }
-
-    .about {
-        padding: 30px !important;
-    }
-
-    .about h3 {
-        font-size: 24px !important;
-    }
-
-    .about p {
-        font-size: 14px !important;
-    }
-
-    .about .btn {
-        font-size: 12px !important;
-        padding: 5px 10px !important;
-    }
+.banner1 {
+    width: 100%;
+    height: 50vh;
+    background-color: #657f90;
+    position: relative;
+    overflow: hidden;
 }
 
-.intro-bg {
+.banner1 img {
     width: 100%;
-    height: 500px;
-    position: relative;
-    background-color: #657f90;
+    height: 100%;
     object-fit: contain;
     object-position: center;
 }
 
-.bg-text {
-    width: 100%;
-    height: auto;
+.banner1 .overlay {
     position: absolute;
-    /* left: 5%; */
-    top: 25%;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    text-align: left;
+    padding: 20px;
+    color: #fff;
+    width: 30%;
 }
 
-
-.bg-text .title {
+.banner1 .overlay .title {
     width: fit-content;
-    padding: 15px;
-    margin: 0px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    font-size: 60px;
+    font-size: 2em;
+    margin-bottom: 10px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
-}
-
-.bg-text .description {
-    width: 40%;
-    font-size: 20px;
     padding: 15px;
-    margin: 0px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    background-color: white;
-    /* color: #478077; */
-    color: rgb(105, 105, 105);
 }
 
-.bg-text .btn {
+.banner1 .overlay .content {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    background-color: white;
+    color: rgb(105, 105, 105);
+    padding: 15px;
+}
+
+.banner1 .overlay .button {
     background-color: #fff;
     color: #be3148;
     padding: 10px 24px;
     border: none;
     text-align: center;
     border-radius: 20px;
-    margin-left: 50px;
     text-decoration: none;
     display: inline-block;
+    font-size: 1.2em;
     font-weight: bold;
+    cursor: pointer;
 }
 
-.second-intro {
+.banner2 {
     width: 100%;
-    height: 350px;
+    height: 35vh;
+    display: flex;
+    background-color: #478077;
+}
+
+.banner2 .column {
+    flex: 1;
+}
+
+.banner2 .column img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.second-intro-half {
-    color: white;
-    height: 350px;
-    background-color: #478077;
-    position: relative;
+.banner2 .content {
+    height: 100%;
+    text-align: left;
+    color: #fff;
+    max-width: 70%;
+    padding: 0px 50px;
+    display: grid;
+    justify-content: center;
+    justify-items: start;
+    align-items: center;
+    align-content: center;
 }
 
-.second-intro-half .title {
-    width: fit-content;
-    padding: 15px;
-    margin: 0;
-    font-size: 30px;
+.banner2 .content h1 {
+    font-size: 1.5em;
+    margin: 0px 0px 10px 0px;
 }
 
-.second-intro-half .description {
-    width: fit-content;
-    padding: 15px;
-    margin: 0px;
-    font-size: 20px;
+.banner2 .content p {
+    font-size: 1em;
+    margin: 0px 0px 20px 0px;
 }
 
-.second-intro-half .btn {
+.banner2 .content .button {
     background-color: #478077;
     border: none;
     color: white;
@@ -284,19 +202,17 @@ const items = [
     font-size: 16px;
     font-weight: bold;
     transition-duration: 0.4s;
+    cursor: pointer;
 }
 
-.second-intro-half .btn:hover {
+.banner2 .content .button:hover {
     background-color: #fff;
     color: #478077;
 }
 
 .cta {
     background-color: #ececec;
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding: 50px 80px;
 }
 
 .cta h1 {
@@ -305,24 +221,24 @@ const items = [
 
 .cta p {
     font-size: 20px;
+    margin-bottom: 20px;
 }
 
-.cta .action {
+.cta .inner {
     background-color: white;
     padding: 30px;
     text-align: center;
     font-size: 25px;
-    margin-top: 20px;
 }
 
-.cta .action a {
+.cta .inner a {
     text-decoration: none;
     color: #497c8f;
     font-weight: bold;
     border-bottom: 2px solid #497c8f;
 }
 
-.cta .btn {
+.cta button {
     background-color: #be3148;
     color: #fff;
     padding: 8px 20px;
@@ -335,22 +251,23 @@ const items = [
     margin-left: 15px;
 }
 
-.about {
-    padding: 80px;
+.banner3 {
     background-color: #497c8f;
     color: white;
+    padding: 50px 80px;
 }
 
-.about h3 {
-    font-size: 30px;
-
+.banner3 h1 {
+    font-size: 1.5em;
+    margin: 0px 0px 10px 0px;
 }
 
-.about p {
-    font-size: 16px;
+.banner3 p {
+    font-size: 1.2em;
+    margin: 0px 0px 20px 0px;
 }
 
-.about .btn {
+.banner3 button {
     background-color: white;
     border: none;
     color: #be3148;
@@ -359,15 +276,116 @@ const items = [
     text-decoration: none;
     display: inline-block;
     border-radius: 20px;
-    font-size: 14px;
+    font-size: 1.2em;
     font-weight: bold;
+    margin-top: 30px;
 }
 
+@media screen and (max-width: 768px) {
 
+    .banner1 {
+        height: 30vh;
+    }
 
-.space-evenly {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    .banner1 .overlay {
+        width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        display: grid;
+        justify-items: center;
+    }
+
+    .banner1 .overlay .title {
+        padding: 5px;
+        font-size: 1.5em;
+    }
+
+    .banner1 .overlay .content {
+        font-size: 1em;
+        padding: 5px;
+    }
+
+    .banner1 .overlay .button {
+        font-size: 1em;
+    }
+
+    .banner2 {
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .banner2 .column {
+        width: 100%;
+        height: fit-content;
+        margin: 0;
+    }
+
+    .banner2 .column .content {
+        max-width: 100%;
+        margin: 20px 0px;
+    }
+
+    .banner2 .column h1 {
+        padding: 5px;
+        font-size: 1.5em;
+    }
+
+    .banner2 .column p {
+        font-size: 1em;
+        padding: 5px;
+    }
+
+    .banner2 .column button {
+        font-size: 1em;
+    }
+
+    .cta {
+        padding: 30px !important;
+    }
+
+    .cta h1 {
+        font-size: 1.5em;
+    }
+
+    .cta p {
+        font-size: 1em;
+    }
+
+    .cta .inner {
+        padding: 20px;
+        display: grid;
+        justify-items: center;
+    }
+
+    .cta .inner span {
+        font-size: 20px;
+    }
+
+    .cta button {
+        font-size: 16px;
+        margin: 20px 0px 0px 0px;
+        width: fit-content;
+    }
+
+    .banner3 {
+        text-align: center;
+    }
+
+    .banner3 h1 {
+        font-size: 1.5em;
+    }
+
+    .banner3 p {
+        font-size: 1em;
+    }
+
+    .banner3 .center button {
+        font-size: 16px;
+    }
+
 }
 </style>

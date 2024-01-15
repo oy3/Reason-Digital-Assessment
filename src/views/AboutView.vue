@@ -1,7 +1,7 @@
 <script setup>
 import { RouterLink } from "vue-router";
 import ArrowDown from "../assets/icon/ArrowDown.vue";
-import { useSinglePrismicDocument, PrismicText } from '@prismicio/vue';
+import { useSinglePrismicDocument, PrismicText, PrismicImage } from '@prismicio/vue';
 import TypeSection from '../components/TypeSection.vue';
 
 
@@ -10,48 +10,40 @@ const about = useSinglePrismicDocument("about").data;
 </script>
 
 <template>
-    <div>
-        <div>
-            <PrismicImage class="intro-bg" :field="about.data.intro_img" fallback="" />
-            <div class="bg-text">
-                <p class="title">
-                    <PrismicText :field="about.data.intro_title" fallback="" />
-                </p>
-                <p class="description">
-                    <PrismicText :field="about.data.intro_content" fallback="" />
-                </p>
+    <div class="container">
+        <div class="banner1">
+            <PrismicImage :field="about.data.intro_img" fallback="" />
+            <div class="overlay">
+                <PrismicText class="title" :field="about.data.intro_title" fallback="" />
+                <PrismicText class="content" :field="about.data.intro_content" fallback="" />
             </div>
         </div>
 
-        <div class="row" style="padding: 50px; border-bottom: 1px solid #ccc;">
-            <div class="container">
-                <TypeSection :section="about.data" />
-            </div>
+        <div class="tiles">
+            <TypeSection :section="about.data" />
         </div>
 
         <div class="cta">
             <h1>
                 <PrismicText :field="about.data.cta_heading" fallback="" />
             </h1>
+
             <div class="row">
                 <div class="column">
-                    <div class="">
-                        <PrismicImage class="second-intro" :field="about.data.cta_img" fallback="" />
-                    </div>
+                    <PrismicImage :field="about.data.cta_img" fallback="" />
                 </div>
-                <div class="column second-intro-half">
-                    <div style=" margin: 0; position: absolute; top: 50%; transform: translateY(-50%);  padding: 40px;">
-                        <p class="title">
+                <div class="column">
+                    <div class="content">
+                        <h1>
                             <PrismicText :field="about.data.cta_title" fallback="" />
-                        </p>
-                        <p class="description">
+                        </h1>
+                        <p>
                             <PrismicText :field="about.data.cta_content" fallback="" />
                         </p>
-                        <button class="btn">
+                        <button>
                             <PrismicText :field="about.data.cta_btn" fallback="" />
                         </button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -59,98 +51,103 @@ const about = useSinglePrismicDocument("about").data;
 </template>
 
 <style scoped>
-.intro-bg {
+.banner1 {
     width: 100%;
-    height: 500px;
+    height: 50vh;
     position: relative;
+    overflow: hidden;
+}
+
+.banner1 img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.bg-text {
-    width: 100%;
-    height: auto;
+.banner1 .overlay {
     position: absolute;
-    top: 25%;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    text-align: left;
+    padding: 20px;
+    color: #fff;
+    width: 30%;
 }
 
-
-.bg-text .title {
+.banner1 .overlay .title {
     width: fit-content;
-    padding: 15px;
-    margin: 0px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    font-size: 50px;
+    font-size: 2em;
+    margin-bottom: 10px;
     background-color: #497c8f;
     color: white;
+    padding: 15px;
 }
 
-.bg-text .description {
-    width: 40%;
-    font-size: 25px;
-    padding: 15px;
-    margin: 0px;
+.banner1 .overlay .content {
+    font-size: 1.2em;
     margin-bottom: 20px;
-    margin-left: 50px;
     background-color: rgba(0, 0, 0, 0.667);
     color: white;
+    padding: 15px;
 }
 
-.container {
+.tiles {
+    height: fit-content;
     display: flex;
-    justify-content: space-between;
-    padding: 20px;
+    justify-content: space-around;
+    padding: 50px 5%;
 }
-
-
 
 .cta {
     background-color: #ececec;
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
-.cta h1 {
-    margin: 0;
+    padding: 50px 80px;
 }
 
 .cta .row {
-    margin-top: 50px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    background-color: #497c8f;
 }
 
-.cta .second-intro {
+.cta .column {
+    flex: 1;
+}
+
+
+.cta .column img {
     width: 100%;
-    height: 350px;
+    height: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.cta .second-intro-half {
-    color: white;
-    height: 350px;
-    background-color: #497c8f;
-    position: relative;
+
+
+.cta .column .content {
+    height: 100%;
+    text-align: left;
+    color: #fff;
+    max-width: 80%;
+    padding: 10px 50px;
+    display: grid;
+    justify-content: center;
+    justify-items: start;
+    align-items: center;
+    align-content: center;
 }
 
-.cta .second-intro-half .title {
-    width: fit-content;
-    padding: 15px;
-    margin: 0;
-    font-weight: bold;
-    font-size: 35px;
-}
-
-.cta .second-intro-half .description {
-    width: fit-content;
-    padding: 15px;
-    margin: 0px;
+.cta .row .column .content h1 {
     font-size: 25px;
 }
 
-.cta .second-intro-half .btn {
+.cta .row .column .content p {
+    font-size: 20px;
+}
+
+.cta .row .column .content button {
     background-color: #497c8f;
     border: none;
     color: white;
@@ -160,91 +157,88 @@ const about = useSinglePrismicDocument("about").data;
     border-radius: 20px;
     text-decoration: none;
     display: inline-block;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     transition-duration: 0.4s;
-    margin-top: 10px;
 }
 
-.cta .second-intro-half .btn:hover {
+.cta .row .column .content button:hover {
     background-color: #fff;
     color: #be3148;
 }
 
-@media (max-width: 768px) {
-    .intro-bg {
-        height: 300px !important;
+
+@media screen and (max-width: 768px) {
+
+    .banner1 {
+        height: 30vh;
     }
 
-    .bg-text .title {
-        margin: 0px !important;
-        margin-bottom: 10px !important;
-        padding: 10px !important;
-        margin-left: 20px !important;
-        font-size: 30px !important;
+    .banner1 .overlay {
+        width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        display: grid;
+        justify-items: center;
     }
 
-    .bg-text .description {
-        width: fit-content !important;
-        font-size: 16px !important;
-        margin: 15px !important;
+    .banner1 .overlay .title {
+        padding: 5px;
+        font-size: 1.5em;
     }
 
-    .container {
+    .banner1 .overlay .content {
+        font-size: 1em;
+        padding: 5px;
+    }
+
+    .tiles {
         flex-direction: column;
-    }
-
-    .col {
-        max-width: 100%;
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-
-    .col img {
-        height: 250px;
-    }
-
-    .col h2 {
-        font-size: 1.2rem;
-    }
-
-    .col p {
-        font-size: 14px;
+        padding: 50px 10vw;
     }
 
     .cta {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 0px;
+    }
+
+    .cta .row {
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .cta .column {
+        width: 100%;
+        height: fit-content;
+        margin: 0;
     }
 
     .cta h1 {
-        font-size: 24px;
+        font-size: 1.5em;
+        padding: 20px 20px;
+        margin: 0;
     }
 
-    .cta .second-intro {
-        height: 200px !important;
+    .cta .column .content {
+        padding: 40px 20px;
+        justify-items: center;
+        max-width: 100%;
+        text-align: center;
     }
 
-    .cta .second-intro-half {
-        height: 200px !important;
+    .cta .row .column .content h1 {
+        font-size: 1.5em;
     }
 
-    .cta .second-intro-half .title {
-        font-size: 20px;
-        padding: 0px;
-        margin-bottom: 10px;
+    .cta .row .column .content p {
+        font-size: 1em;
     }
 
-    .cta .second-intro-half .description {
-        font-size: 14px;
-        padding: 0px;
-        margin-bottom: 15px;
-    }
-
-    .cta .second-intro-half .btn {
-        margin-top: 0px;
+    .cta .row .column .content button {
         font-size: 16px;
-        padding: 5px 10px;
     }
 }
 </style>

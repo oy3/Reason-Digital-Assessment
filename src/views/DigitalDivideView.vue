@@ -9,16 +9,11 @@ const divide = useSinglePrismicDocument("divide").data;
 
 <template>
     <div>
-        <!-- Header Section -->
-        <div>
-            <PrismicImage class="intro-bg" :field="divide.data.intro_img" fallback="" />
-            <div class="bg-text">
-                <p class="title">
-                    <PrismicText :field="divide.data.intro_title" fallback="" />
-                </p>
-                <p class="description">
-                    <PrismicText :field="divide.data.intro_content" fallback="" />
-                </p>
+        <div class="banner1">
+            <PrismicImage :field="divide.data.intro_img" fallback="" />
+            <div class="overlay">
+                <PrismicText class="title" :field="divide.data.intro_title" fallback="" />
+                <PrismicText class="content" :field="divide.data.intro_content" fallback="" />
             </div>
         </div>
 
@@ -49,42 +44,47 @@ const divide = useSinglePrismicDocument("divide").data;
 </template>
   
 <style scoped>
-.intro-bg {
+.banner1 {
     width: 100%;
-    height: 500px;
+    height: 50vh;
     position: relative;
-    object-fit: cover;
-    object-position: top;
+    overflow: hidden;
 }
 
-.bg-text {
+.banner1 img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.banner1 .overlay {
     position: absolute;
-    top: 25%;
-}
-
-
-.bg-text .title {
-    width: fit-content;
-    padding: 15px;
-    margin: 0px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    font-size: 60px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-}
-
-.bg-text .description {
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    text-align: left;
+    padding: 20px;
+    color: #fff;
     width: 40%;
-    font-size: 20px;
-    padding: 15px;
-    margin: 0px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    background-color: #04AA6D;
+}
+
+.banner1 .overlay .title {
+    width: fit-content;
+    font-size: 2em;
+    margin-bottom: 10px;
+    background-color: #00000080;
     color: white;
+    padding: 15px;
+}
+
+.banner1 .overlay .content {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    background-color: #04aa6d;
+    color: white;
+    padding: 15px;
 }
 
 .content {
@@ -143,19 +143,30 @@ const divide = useSinglePrismicDocument("divide").data;
 }
 
 @media (max-width: 768px) {
-    .intro-bg {
-        height: 300px;
+    .banner1 {
+        height: 30vh;
     }
 
-    .bg-text .title {
-        font-size: 36px;
-        margin: 0px 20px !important;
+    .banner1 .overlay {
+        width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        display: grid;
+        justify-items: center;
     }
 
-    .bg-text .description {
-        width: fit-content;
-        font-size: 16px;
-        margin: 10px 20px !important;
+    .banner1 .overlay .title {
+        padding: 5px;
+        font-size: 1.5em;
+    }
+
+    .banner1 .overlay .content {
+        font-size: 1em;
+        padding: 5px;
     }
 
     .content {

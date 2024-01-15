@@ -8,46 +8,38 @@ const learn = useSinglePrismicDocument("learn").data;
 </script>
 
 <template>
-    <div>
-        <div>
-            <PrismicImage class="intro-bg" :field="learn.data.intro_img" fallback="" />
-            <div class="bg-text">
-                <p class="title">
-                    <PrismicText :field="learn.data.intro_title" fallback="" />
-                </p>
-                <p class="description">
-                    <PrismicText :field="learn.data.intro_content" fallback="" />
-                </p>
+    <div class="container">
+        <div class="banner1">
+            <PrismicImage :field="learn.data.intro_img" fallback="" />
+            <div class="overlay">
+                <PrismicText class="title" :field="learn.data.intro_title" fallback="" />
+                <PrismicText class="content" :field="learn.data.intro_content" fallback="" />
             </div>
         </div>
 
-        <div class="row" style=" margin: 50px;">
+        <div class="banner2">
             <div class="column">
-                <div class="second-intro">
-
-                    <!-- <PrismicEmbed :field="learn.data.banner_embed" /> -->
-
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/M3mKVegrEus?si=JSn2Efa-eczeQzza"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                </div>
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/M3mKVegrEus?si=JSn2Efa-eczeQzza"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
             </div>
-            <div class="column second-intro-half">
-                <div style=" margin: 0; position: absolute; top: 50%; transform: translateY(-50%);  padding: 40px;">
-                    <p class="title">
+            <div class="column">
+                <div class="content">
+                    <h1>
                         <PrismicText :field="learn.data.banner_title" fallback="" />
-                    </p>
-                    <p class="description">
+                    </h1>
+                    <p>
                         <PrismicText :field="learn.data.banner_content" fallback="" />
                     </p>
-                    <button class="btn">
+                    <button>
                         <PrismicText :field="learn.data.banner_btn" fallback="" />
                     </button>
                 </div>
-
             </div>
         </div>
+
+
 
         <div class="cta">
             <h1>
@@ -65,71 +57,85 @@ const learn = useSinglePrismicDocument("learn").data;
 </template>
 
 <style scoped>
-.intro-bg {
+.banner1 {
     width: 100%;
-    height: 500px;
+    height: 50vh;
     position: relative;
+    overflow: hidden;
+}
+
+.banner1 img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.bg-text {
-    width: 100%;
-    height: auto;
+.banner1 .overlay {
     position: absolute;
-    top: 25%;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    text-align: left;
+    padding: 20px;
+    color: #fff;
+    width: 30%;
 }
 
-
-.bg-text .title {
+.banner1 .overlay .title {
     width: fit-content;
-    padding: 15px;
-    margin: 0px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    font-size: 50px;
+    font-size: 2em;
+    margin-bottom: 10px;
     background-color: #497c8f;
     color: white;
-}
-
-.bg-text .description {
-    width: 40%;
-    font-size: 20px;
     padding: 15px;
-    margin: 0px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-    background-color: white;
-    color: rgb(105, 105, 105);
 }
 
-.second-intro {
+.banner1 .overlay .content {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.667);
+    color: white;
+    padding: 15px;
+}
+
+.banner2 {
     width: 100%;
-    height: 350px;
+    height: 35vh;
+    display: flex;
+    background-color: white;
+    padding: 50px;
 }
 
-.second-intro-half {
-    color: white;
-    height: 350px;
+.banner2 .column {
+    flex: 1;
+}
+
+.banner2 .content {
     background-color: #497c8f;
-    position: relative;
+    height: 100%;
+    text-align: left;
+    color: #fff;
+    max-width: 70%;
+    padding: 0px 50px;
+    display: grid;
+    justify-content: center;
+    justify-items: start;
+    align-items: center;
+    align-content: center;
 }
 
-.second-intro-half .title {
-    width: fit-content;
-    padding: 15px;
-    margin: 0;
-    font-size: 30px;
+.banner2 .content h1 {
+    font-size: 1.5em;
+    margin: 0px 0px 10px 0px;
 }
 
-.second-intro-half .description {
-    width: fit-content;
-    padding: 15px;
-    margin: 0px;
-    font-size: 20px;
+.banner2 .content p {
+    font-size: 1em;
+    margin: 0px 0px 20px 0px;
 }
 
-.second-intro-half .btn {
+.banner2 .content button {
     background-color: #497c8f;
     border: none;
     color: white;
@@ -142,9 +148,10 @@ const learn = useSinglePrismicDocument("learn").data;
     font-size: 16px;
     font-weight: bold;
     transition-duration: 0.4s;
+    cursor: pointer;
 }
 
-.second-intro-half .btn:hover {
+.banner2 .content button:hover {
     background-color: #fff;
     color: #be3148;
 }
@@ -178,41 +185,61 @@ const learn = useSinglePrismicDocument("learn").data;
 }
 
 @media (max-width: 768px) {
-    .intro-bg {
-        height: 300px;
+    .banner1 {
+        height: 30vh;
     }
 
-    .bg-text .title {
-        padding: 15px;
-        margin: 0px;
-        margin-bottom: 20px;
-        margin-left: 50px;
-        font-size: 30px;
+    .banner1 .overlay {
+        width: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        display: grid;
+        justify-items: center;
     }
 
-    .bg-text .description {
-        width: fit-content;
-        font-size: 18px;
-        padding: 15px;
-        margin: 0px 50px;
+    .banner1 .overlay .title {
+        padding: 5px;
+        font-size: 1.5em;
     }
 
-    .second-intro-half .title {
-        margin: 0px 0px 15px 0px;
-        padding: 0px;
-        font-size: 20px;
-        font-weight: bold
+    .banner1 .overlay .content {
+        font-size: 1em;
+        padding: 5px;
     }
 
-    .second-intro-half .description {
-        padding: 0px;
-        margin: 0px 0px 15px 0px;
-        font-size: 16px;
+    .banner2 {
+        padding: 30px 0px 0px 0px;
+        flex-direction: column;
+        height: fit-content;
     }
 
-    .second-intro-half .btn {
-        font-size: 14px;
-        padding: 5px 10px;
+    .banner2 .column {
+        width: 100%;
+        height: fit-content;
+        margin: 0;
+    }
+
+    .banner2 .column .content {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .banner2 .column h1 {
+        padding: 5px;
+        font-size: 1.5em;
+    }
+
+    .banner2 .column p {
+        font-size: 1em;
+        padding: 5px;
+    }
+
+    .banner2 .column button {
+        font-size: 1em;
     }
 
     .cta {

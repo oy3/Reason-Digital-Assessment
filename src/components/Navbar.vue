@@ -1,56 +1,85 @@
 <script  setup>
 import { useStore } from 'vuex';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { RouterLink } from 'vue-router';
-import Search from "../assets/icon/Search.vue";
-import FingerPrint from "../assets/icon/FingerPrint.vue";
-
+import Search from '../assets/icon/Search.vue';
+import FingerPrint from '../assets/icon/FingerPrint.vue';
+import Bars from '../assets/icon/Bars.vue';
 
 const store = useStore();
 
 const menuItems = computed(() => store.state.menuItems);
+
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+    isMenuOpen.value = !isMenuOpen.value;
+};
 </script>
 
 
 <template>
     <main>
-        <ul class="topnav">
-            <li class=""><a class="border-lr" href="">
-                    <Search /> Search
-                </a></li>
-            <div class="right">
-                <li class="link">
-                    <RouterLink class="border-lr" to="/learn">Learn</RouterLink>
-                </li>
-                <li class="">
-                    <RouterLink class="act" to="/">Donate</RouterLink>
-                </li>
-            </div>
-        </ul>
-        <ul class="bottomnav">
-            <li class="logo">
-                <RouterLink to="/">
-                    <div class="center">
-                        <FingerPrint class="icon" />
-                        <div>
-                            <span class="top">GoodThings</span>
-                            <br>
-                            <span class="bottom">Foundaton</span>
-                        </div>
-                    </div>
-                </RouterLink>
-            </li>
-            <div class="right center">
-                <li v-for="menuItem in menuItems" :key="menuItem.label">
-                    <RouterLink :to="menuItem.to">{{ menuItem.label }}</RouterLink>
-                </li>
+        <nav>
+            <div class="topnav">
+                <div class="left">
+                    <RouterLink class="border-lr center" to="/">
+                        <Search /> Search
+                    </RouterLink>
+                </div>
+                <div class="right">
+                    <RouterLink class="border-lr" style="border-bottom: 3px solid #367d91;" to="/learn">Learn</RouterLink>
+                    <RouterLink class="colored-menu" to="/">Donate</RouterLink>
+                </div>
             </div>
 
-        </ul>
+            <div class="bottomnav">
+                <div class="left">
+                    <div class="logo">
+                        <RouterLink to="/">
+                            <div class="center">
+                                <FingerPrint class="icon" />
+                                <div>
+                                    <span class="top">GoodThings</span>
+                                    <br>
+                                    <span class="bottom">Foundaton</span>
+                                </div>
+                            </div>
+                        </RouterLink>
+                    </div>
+                    <button class="menu-btn" @click="toggleMenu">
+                        <Bars />
+                    </button>
+                </div>
+
+                <div class="right" :class="{ 'responsive-menu': isMenuOpen }">
+                    <p v-for="menuItem in menuItems" :key="menuItem.label">
+                        <RouterLink :to="menuItem.to">{{ menuItem.label }}</RouterLink>
+                    </p>
+                </div>
+
+            </div>
+        </nav>
     </main>
 </template>
 
 <style scoped>
+nav a {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+.colored-menu {
+    background-color: #cf1b46;
+    color: white !important;
+}
+
+.colored-menu:hover {
+    background-color: #367d91 !important;
+    color: white !important;
+}
+
+/* Logo */
 .logo {
     display: flex;
 }
@@ -72,102 +101,143 @@ const menuItems = computed(() => store.state.menuItems);
     font-weight: lighter;
 }
 
-/* Top Nav */
-ul.topnav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    padding-left: 100px;
-    padding-right: 100px;
+.border-lr {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.menu-btn {
+    padding: 10px 30px;
+    border-radius: 20px;
+    background-color: #cf1b46;
+    display: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Top Navbar */
+.topnav {
     overflow: hidden;
-    background-color: #fff;
+    background-color: white;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 5%;
+    border-bottom: 1px solid #ddd;
 }
 
-ul.topnav li {
-    float: left;
+.topnav .left {
+    display: flex;
+    align-items: center;
 }
 
-ul.topnav li a {
-    display: block;
-    color: black;
-    text-align: center;
+.topnav .right {
+    display: flex;
+    align-items: center;
+}
+
+.topnav a {
+    text-decoration: none !important;
     padding: 14px 16px;
+    font-size: 16px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Bottom Navbar */
+.bottomnav {
+    color: #333;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 5%;
+}
+
+.bottomnav .left {
+    display: flex;
+    align-items: center;
+}
+
+.bottomnav .left a:hover {
+    background-color: transparent;
+    color: black;
+}
+
+.bottomnav .left .logo a:hover {
+    color: black !important;
+}
+
+.bottomnav .right {
+    display: flex;
+    align-items: center;
+}
+
+.bottomnav img {
+    height: 40px;
+}
+
+.bottomnav a {
     text-decoration: none;
+    padding: 14px 16px;
+    font-size: 16px;
+    font-weight: bold !important;
 }
 
-ul.topnav li a:hover:not(.active) {
-    border-bottom: 3px solid #527b72;
+.bottomnav a:hover {
+    color: #367d91 !important;
 }
 
-ul.topnav li a.border-lr {
-    border-left: 1px solid #bbb;
-    border-right: 1px solid #bbb;
-}
-
-ul.topnav li a.active {
-    border-bottom: 3px solid #527b72;
-}
-
-ul.topnav li a.act {
-    color: white;
-    background-color: #be3148;
-}
-
-ul.topnav .right {
-    float: right;
-}
-
-@media screen and (max-width: 600px) {
-
-    ul.topnav li.right,
-    ul.topnav li {
-        float: none;
+@media screen and (min-width: 768px) {
+    #bottomnav {
+        display: block;
     }
 }
 
-/* Bottom Nav */
-ul.bottomnav {
-    border-top: 1px solid #bbb;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    padding-left: 100px;
-    padding-right: 100px;
-    overflow: hidden;
-    background-color: #fff;
-}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .topnav {
+        padding: 0px 10px;
+        flex-direction: flex-direction;
+    }
 
-ul.bottomnav li {
-    float: left;
-}
+    .bottomnav {
+        padding: 0px 10px;
+        flex-direction: column;
+    }
 
-ul.bottomnav li a {
-    display: block;
-    color: black;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-weight: bold;
-}
+    .bottomnav .left {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
 
-ul.bottomnav li a:hover:not(.active) {
-    color: #04AA6D;
-}
 
-ul.bottomnav li a.active {
-    border-bottom: 3px solid #04AA6D;
-}
+    .bottomnav .right {
+        display: none;
+        text-align: center;
+    }
 
-ul.bottomnav .right {
-    float: right;
-}
+    .bottomnav .right.responsive-menu {
+        display: grid;
+    }
 
-@media screen and (max-width: 600px) {
+    .topnav a.icon {
+        display: block;
+        order: -1;
+    }
 
-    ul.bottomnav li.right,
-    ul.bottomnav li {
-        float: none;
+    .bottomnav .left img {
+        order: -1;
+    }
+
+    .menu-btn {
+        display: block;
+        margin-top: 10px;
     }
 }
 </style>
-
-

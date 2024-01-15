@@ -3,7 +3,7 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-.column {
+/* .column {
     float: left;
     width: 50%;
 }
@@ -12,7 +12,7 @@ body {
     content: "";
     display: table;
     clear: both;
-}
+} */
 
 
 .center {
@@ -29,4 +29,16 @@ textarea {
     border: 2px solid #ccc;
     border-radius: 4px;
     background-color: #f8f8f8;
-  }
+}
+
+.d-none {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.d-grid {
+    display: grid;
+}
